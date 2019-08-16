@@ -31,6 +31,13 @@ class HierarchyLock
 
     static void HierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
     {
+#if UNITY_2018_3_OR_NEWER
+        if (UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() != null)
+        {
+            return;
+        }
+#endif
+
         GameObject hierarchyGameObject = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
 
         if (!hierarchyGameObject)
